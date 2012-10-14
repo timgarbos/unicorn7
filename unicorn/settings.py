@@ -156,7 +156,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'crispy_forms',
     'oembed',
-    'profiles',
+    #'profiles',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
