@@ -9,37 +9,48 @@
  <div class="row">
   <div class="span12">
     
-    <h2>{{ game.title }}</h2>
+    <h1>{{ game.title }}</h1>
      <p>
-    <small>{{ game.pub_date }} }</small>
+    <h2><small>submitted {{ game.pub_date|date:"M d, Y" }} by timgarbos</small></h2>
     </p>
+  </div>
   </div>
   <div class="row">
 <div class="span8">
     
  
     <div>
-    <img src="http://placehold.it/600x400" alt="{{ game.title }}" />
+    <img src="http://placehold.it/600x400" alt="{{ game.title }}" class="full-width img-rounded"/>
 
 
     </div>
 
-    <h3>Share it!</h3>
-    <p>FACEBOOK! TWITTER! BLAH BLAH </p>
+   <div class="margin10">
     
-    <h3>Description</h3>
-    {% oembed 790x790 %}
-    <p>{{ game.short_description }}</p>
-    {% endoembed %}
+     <a href="https://twitter.com/share" class="twitter-share-button" data-via="unicorn7ish">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
 
-    <h3>Credits</h3>
-    {% oembed 790x790 %}
-    <p>{{ game.short_credits }}</p>
-    {% endoembed %}
-    <ul>
-    	{#% url profile u.id %#}
-    </ul>
-    
+ <div class="fb-like" data-href="http://unicorn7.org" data-send="false"  data-show-faces="false"></div>
+
+   </div>
+
+    <div class="well">
+      <h3>Description</h3>
+      {% oembed %}
+      <p>{{ game.short_description }}</p>
+      {% endoembed %}
+   </div>
+
+  <div class="well">
+      <h3>Credits</h3>
+      {% oembed %}
+      <p>{{ game.short_credits }}</p>
+      {% endoembed %}
+      <ul>
+      	{#% url profile u.id %#}
+      </ul>
+  </div>
     
 </div>
 
