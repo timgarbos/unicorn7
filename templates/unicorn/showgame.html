@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load oembed_tags %}
+
+{% block content %}
+
+
+
+ 
+<div class="span-20">
+    
+    <h2>{{ game.title|upper }}</h2>
+    <p>
+    published:  {{ game.pub_date }}  - last updated: {{ game.pub_date }}
+    </p>
+    <div>
+    <img src="" alt="{{ game.title }}" class="span-20"/>
+    {% oembed 790x790 %}
+    	{{ game.video_link }}
+    {% endoembed %}
+    </div>
+    <p>{{ game.tags }}</p>
+    
+    <h3>Share it!</h3>
+    <p>FACEBOOK! TWITTER! BLAH BLAH </p>
+    
+    <h3>Description</h3>
+    <p>{{ game.short_description }}</p>
+    
+    <h3>Credits</h3>
+    <p>{{ game.short_credits }}</p>
+    <ul>
+    	{#% url profile u.id %#}
+    </ul>
+    
+    
+</div>
+
+<div class="span-4 last bg-grey">
+    
+    <h4>Play it!</h4>
+    <ul>
+   	 <li><a href="{{ game.playable_link }}" alt="playable link" > Play it here </a></li>
+   	 <li><a href="{{ game.download_link }}" alt="download link" > Download it here </a></li>
+   	 <li><a href="{{ game.download_link }}" alt="developer link" > Developers website </a></li>
+    </ul>
+    
+    <h4>Rating</h4>
+    
+     <ul>
+   	 <li> Fun: **</li>
+   	 <li> Visuals: **</li>
+   	 <li> Audio: **</li>
+   	 <li> Novelty: **</li>
+   	 <li> Humour: ****</li>
+   	 <li> Tech: ***</li>  
+   	 </ul>
+   	 <a href="#">Review game <a/>
+    
+    
+</div>
+
+
+{% endblock %}

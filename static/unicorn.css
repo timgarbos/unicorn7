@@ -1,0 +1,47 @@
+.game-list-item
+{
+
+		width:230px;
+}
+
+.gameslist
+{
+	max-width: 920px;
+}
+
+.mainmenu-item
+{
+	font-size:2em;
+	margin-bottom:0.75em;
+	background-color:#E6EFF2;
+	text-align:center;
+	padding:5px;
+}
+
+.topmenu-item
+{
+	font-size:1.5em;
+	margin-bottom:0.25em;
+	background-color:#E6EFF2;
+	text-align:center;
+	padding:3px;
+}
+
+.list-none
+{
+	list-style-type:none; 
+	padding:0;
+	margin"0;
+}
+
+.left
+{
+	float:left;
+}
+
+.bg-grey
+{
+	background-color:#E6EFF2;
+
+}
+
