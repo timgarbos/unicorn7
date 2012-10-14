@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% load url from future %}
 <div class="row">
 <div class="span2">
 
     
- 
-      <ul class="nav nav-pills nav-stacked">
+  <div class="well" >
+      <ul class="nav nav-pills  nav-stacked">
         <li class="nav-header">Sorting</li>
     	<li><a href="#">Featured</a></li>
     	<li><a href="#">Latest</a></li>
@@ -24,8 +24,6 @@
 
      <li class="nav-header">Platform</li>
 
-       <ul class="nav nav-pills nav-stacked">
-
     	
         <li><a href="#">Web</a></li>
     	<li><a href="#">Windows</a></li>
@@ -35,80 +33,51 @@
     </ul>
     
 </div>
-
-  <div >
+</div>
+  <div class="span10">
             <ul class="thumbnails">
               
+
+              {% for game in games %}
               <li class="game-list-item pull-left">
+                <a href="{% url 'games.views.showgame' id=game.id %}" class="no-decoration">
                 <div class="thumbnail">
                   <img src="http://placehold.it/230x200" alt="" class="img-rounded">
                   <div class="caption">
-                    <h4>Game title</h4>
-                    <p>A game about silly animals fighting with real physics. Whimsical, stupid and fun.</p>
+                    <h5>{{ game.title }}</h5>
+                    <p><small>{{ game.short_description|truncatechars:140 }}</small></p>
                     
                   </div>
                 </div>
+              </a>
               </li>
-
-                <li class="game-list-item pull-left">
-                <div class="thumbnail">
-                  <img src="http://placehold.it/230x200" alt="" class="img-rounded">
-                  <div class="caption">
-                    <h4>Game title</h4>
-                    <p>A game about silly animals fighting with real physics. Whimsical, stupid and fun.</p>
-                    
-                  </div>
-                </div>
-              </li>
-
-                <li class="game-list-item pull-left">
-                <div class="thumbnail">
-                  <img src="http://placehold.it/230x200" alt="" class="img-rounded">
-                  <div class="caption">
-                    <h4>Game title</h4>
-                    <p>A game about silly animals fighting with real physics. Whimsical, stupid and fun.</p>
-                    
-                  </div>
-                </div>
-              </li>
-
-                <li class="game-list-item pull-left">
-                <div class="thumbnail">
-                  <img src="http://placehold.it/230x200" alt="" class="img-rounded">
-                  <div class="caption">
-                    <h4>Game title</h4>
-                    <p>A game about silly animals fighting with real physics. Whimsical, stupid and fun.</p>
-                    
-                  </div>
-                </div>
-              </li>
-
-                <li class="game-list-item pull-left">
-                <div class="thumbnail">
-                  <img src="http://placehold.it/230x200" alt="" class="img-rounded">
-                  <div class="caption">
-                    <h4>Game title</h4>
-                    <p>A game about silly animals fighting with real physics. Whimsical, stupid and fun.</p>
-                    
-                  </div>
-                </div>
-              </li>
+              {% endfor %}
 
 
-              
-            </ul>
+ </ul>
             <div class="pagination pagination-centered">
                 <ul >
-                 <li><a href="#">Previous</a></li>
-                 <li class="inactive"><a href="#">1</a></li>
-                 <li class="inactive"><a href="#">2</a></li>
-                 <li class="inactive"><a href="#">3</a></li>
-                 <li class="inactive"><a href="#">4</a></li>
-                   <li><a href="#">Next</a></li>
+                   {% if games.has_previous %}
+                    <li><a href="?page={{ games.previous_page_number }}">Previous</a></li>
+  
+                 {% endif %}
+                 
+                 {% for i in games.paginator.page_range %}
+                  {% if games.paginator.num_pages < 10 or i == 1 or i == games.paginator.num_pages or  i >= games.number|add:-3 and i < games.number|add:3 %}
+                 <li class="{%if games.number == i%} active {% else %} inactive {% endif%}"><a href="?page={{ i }}">{{i}}</a></li>
+                 {% endif %}
+                  {% endfor %}
+                  
+                 {% if games.has_next %}
+            
+             <li><a href="?page={{ games.next_page_number }}">Next</a></li>
+        {% endif %}
+               
                </ul>
             </div>
 
-          </div>
+
+ </div>
  
 
 </div>

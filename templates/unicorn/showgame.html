@@ -2,32 +2,40 @@
 {% load oembed_tags %}
 
 {% block content %}
+{% load url from future %}
 
 
 
- 
-<div class="span-20">
+ <div class="row">
+  <div class="span12">
     
-    <h2>{{ game.title|upper }}</h2>
-    <p>
-    published:  {{ game.pub_date }}  - last updated: {{ game.pub_date }}
+    <h2>{{ game.title }}</h2>
+     <p>
+    <small>{{ game.pub_date }} }</small>
     </p>
-    <div>
-    <img src="" alt="{{ game.title }}" class="span-20"/>
-    {% oembed 790x790 %}
-    	{{ game.video_link }}
-    {% endoembed %}
-    </div>
-    <p>{{ game.tags }}</p>
+  </div>
+  <div class="row">
+<div class="span8">
     
+ 
+    <div>
+    <img src="http://placehold.it/600x400" alt="{{ game.title }}" />
+
+
+    </div>
+
     <h3>Share it!</h3>
     <p>FACEBOOK! TWITTER! BLAH BLAH </p>
     
     <h3>Description</h3>
+    {% oembed 790x790 %}
     <p>{{ game.short_description }}</p>
-    
+    {% endoembed %}
+
     <h3>Credits</h3>
+    {% oembed 790x790 %}
     <p>{{ game.short_credits }}</p>
+    {% endoembed %}
     <ul>
     	{#% url profile u.id %#}
     </ul>
@@ -35,29 +43,94 @@
     
 </div>
 
-<div class="span-4 last bg-grey">
+<div class="span4">
     
-    <h4>Play it!</h4>
-    <ul>
-   	 <li><a href="{{ game.playable_link }}" alt="playable link" > Play it here </a></li>
-   	 <li><a href="{{ game.download_link }}" alt="download link" > Download it here </a></li>
-   	 <li><a href="{{ game.download_link }}" alt="developer link" > Developers website </a></li>
-    </ul>
-    
-    <h4>Rating</h4>
-    
-     <ul>
-   	 <li> Fun: **</li>
-   	 <li> Visuals: **</li>
-   	 <li> Audio: **</li>
-   	 <li> Novelty: **</li>
-   	 <li> Humour: ****</li>
-   	 <li> Tech: ***</li>  
-   	 </ul>
-   	 <a href="#">Review game <a/>
+      <div class="well" >
+
+     <ul class="nav nav-pills nav-stacked">
+        <li class="nav-header"><h4>Play it</h4></li>
+      <li><a href="#">Play online</a></li>
+      <li><a href="#">Download (PC)</a></li>
+        <li><a href="#">Download (Mac)</a></li>
+         <li><a href="#">Download (Linux)</a></li>
     
     
+       </ul>
+     </div>
+     <div class="well" >
+      <ul class="nav nav-pills nav-stacked">
+     <li class="nav-header"><h4>Rating</h4></li>
+
+     <li class="nav-header">Overall</li>
+    <li> 
+      <div class="progress progress-warning progress-striped">
+        <div class="bar" style="width: 20%"></div>
+      </div>
+    </li>
+
+
+    <li class="nav-header">Fun</li>
+    <li> 
+      <div class="progress progress-warning progress-striped">
+        <div class="bar" style="width: 40%"></div>
+      </div>
+    </li>
+
+    <li class="nav-header">Novelty</li>
+    <li> 
+      <div class="progress progress-success progress-striped">
+        <div class="bar" style="width: 80%"></div>
+      </div>
+    </li>
+
+    <li class="nav-header">Humour</li>
+    <li> 
+      <div class="progress progress-warning progress-striped">
+        <div class="bar" style="width: 25%"></div>
+      </div>
+    </li>
+
+    <li class="nav-header">Visuals</li>
+    <li> 
+      <div class="progress progress-danger progress-striped">
+        <div class="bar" style="width: 5%"></div>
+      </div>
+    </li>
+
+    <li class="nav-header">Audio</li>
+    <li> 
+      <div class="progress progress-success progress-striped">
+        <div class="bar" style="width: 60%"></div>
+      </div>
+    </li>
+
+
+      </ul>
+
+
+
 </div>
 
+<div class="well" >
+
+<ul class="nav nav-pills  nav-stacked">
+     <li class="nav-header"><h4>Categories</h4></li>
+
+        <li><a href="#">Fighting</a></li>
+        <li><a href="#">Erotic</a></li>
+        <li><a href="#">Card</a></li>
+
+        <li class="nav-header">Extra tags</li>
+
+        <li><a href="#">Kajakklubben</a></li>
+        <li><a href="#">Whimsical</a></li>
+
+      </ul>
+  </div>
+
+
+</div>
+
+</div>
 
 {% endblock %}

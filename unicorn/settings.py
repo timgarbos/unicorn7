@@ -166,10 +166,11 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.openid',
     'allauth.socialaccount.providers.soundcloud',
     'allauth.socialaccount.providers.twitter',
+    'django.core.paginator',
 )
 
 AUTH_PROFILE_MODULE = 'userprofiles.UserProfile'
-
+FORCE_SCRIPT_NAME = ''
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.

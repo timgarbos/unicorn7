@@ -1,3 +1,8 @@
+.no-decoration, .no-decoration:hover
+{
+	text-decoration: none;
+}
+
 .game-list-item
 {
 
