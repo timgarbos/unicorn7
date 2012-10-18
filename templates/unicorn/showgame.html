@@ -56,6 +56,16 @@
 
 <div class="span4">
     
+
+          <div class="well" >
+
+     <ul class="nav nav-pills nav-stacked">
+        <li class="nav-header"><h4>Edit</h4></li>
+      <li><a href="{% url 'games.views.editgamebasic' id=game.id %}">Edit game</a></li>
+      <li><a href="#">Feature game</a></li>
+       </ul>
+     </div>
+
       <div class="well" >
 
      <ul class="nav nav-pills nav-stacked">
@@ -126,16 +136,9 @@
 
 <ul class="nav nav-pills  nav-stacked">
      <li class="nav-header"><h4>Categories</h4></li>
-
-        <li><a href="#">Fighting</a></li>
-        <li><a href="#">Erotic</a></li>
-        <li><a href="#">Card</a></li>
-
-        <li class="nav-header">Extra tags</li>
-
-        <li><a href="#">Kajakklubben</a></li>
-        <li><a href="#">Whimsical</a></li>
-
+      {% for cat in game.categories.all %}
+        <li><a href="#">{{cat.title}}</a></li>
+      {% endfor %}
       </ul>
   </div>
 

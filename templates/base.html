@@ -1,4 +1,6 @@
 {% load url from future %}
+{% load navigation %}
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -53,27 +55,27 @@
                     <a class="brand" href="{% url 'views.index' %}">Unicorn7</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="{% url 'games.views.listgames' %}">Explore</a></li>
-                            <li><a href="#">Submit</a></li>
+                            <li  class="{% navactive topnav 'listgames' %}"><a href="{% url 'games.views.listgames' %}">Explore</a></li>
+                            <li class="{% navactive topnav 'submit' %}"><a href="#">Submit</a></li>
 
                             <li><form class="navbar-search pull-left">
   <input type="text" class="search-query" placeholder="Search">
 </form></li>
-                            <li><a href="{% url 'views.blog' %}" >Blog</a></li>
-                            <li><a href="{% url 'views.about' %}">About</a></li>
+                            <li class="{% navactive topnav 'blog' %}"><a href="{% url 'views.blog' %}" >Blog</a></li>
+                            <li class="{% navactive topnav 'about' %}"><a href="{% url 'views.about' %}">About</a></li>
 
 
 
 {% if user.is_authenticated %}
 
-<li><a href="{% url 'account_email' %}">Profile</a></li>
+<li class="{% navactive topnav 'games' %}"><a href="{% url 'account_email' %}">Profile</a></li>
 
-<li><a href="{% url 'account_logout' %}">Log out</a></li>
+<li class="{% navactive topnav 'logout' %}"><a href="{% url 'account_logout' %}">Log out</a></li>
 
 {% else %}
 
-<li><a href="{% url 'account_signup' %}">Sign up</a></li>
-<li><a href="{% url 'account_login' %}">Log in</a></li>
+<li class="{% navactive topnav 'signup' %}"><a href="{% url 'account_signup' %}">Sign up</a></li>
+<li class="{% navactive topnav 'login' %}"><a href="{% url 'account_login' %}">Log in</a></li>
 
 
 {% endif %}

@@ -5,5 +5,9 @@ urlpatterns = patterns('',
     url(r'list/$', 'games.views.listgames'),
     url(r'submit/$', 'games.views.submit'),
     url(r'game/(?P<id>\d+)/$', 'games.views.showgame'),
+    url(r'editgamebasic/(?P<id>\d+)/$', 'games.views.editgamebasic'),
+    url(r'editgameplatforms/(?P<id>\d+)/$', 'games.views.editgameplatforms'),
+    url(r'editgamecategories/(?P<id>\d+)/$', 'games.views.editgamecategories'),
+    url(r'editgamemedia/(?P<id>\d+)/$', 'games.views.editgamemedia'),
 
 )

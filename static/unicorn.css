@@ -1,3 +1,8 @@
+body
+{
+	#background-image: url('/static/bg.png');
+}
+
 .full-width
 {
 	width:100%;
@@ -15,7 +20,10 @@ h1 {
   font-size: 50px;
   line-height: 50px;
 }
-
+form input,form textarea,form select
+{
+	width:88%;
+}
 .no-decoration, .no-decoration:hover
 {
 	text-decoration: none;

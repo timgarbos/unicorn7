@@ -3,7 +3,7 @@
 {% block content %}
 {% load url from future %}
 <div class="row">
-<div class="span2">
+<div class="span3">
 
     
   <div class="well" >
@@ -15,26 +15,18 @@
     
     
      <li class="nav-header">Category</li>
-
-        <li><a href="#">Platformer</a></li>
-        <li><a href="#">Puzzle</a></li>
-        <li><a href="#">First person</a></li>
-        <li><a href="#">Whatever</a></li>
-
-
+      {% for cat in categories %}
+        <li><a href="#">{{cat.title}}</a></li>
+        {% endfor %}
      <li class="nav-header">Platform</li>
-
-    	
-        <li><a href="#">Web</a></li>
-    	<li><a href="#">Windows</a></li>
-        <li><a href="#">Mac</a></li>
-        <li><a href="#">Linux</a></li>
-        <li><a href="#">Mobile</a></li>
+      {% for platform in platforms %}
+        <li><a href="#">{{platform.title}}</a></li>
+        {% endfor %}
     </ul>
     
 </div>
 </div>
-  <div class="span10">
+  <div class="span9">
             <ul class="thumbnails">
               
 
