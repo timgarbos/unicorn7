@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     url(r'editgameplatforms/(?P<id>\d+)/$', 'games.views.editgameplatforms'),
     url(r'editgamecategories/(?P<id>\d+)/$', 'games.views.editgamecategories'),
     url(r'editgamemedia/(?P<id>\d+)/$', 'games.views.editgamemedia'),
+    url(r'editgamecontact/(?P<id>\d+)/$', 'games.views.editgamecontact'),
 
 )

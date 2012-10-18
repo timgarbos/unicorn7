@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from games.models import Game, GameForm,GamePlatform,GameCategory,GamePlatformLink
+from games.models import Game, GameForm,GamePlatform,GameCategory,GamePlatformLink,ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import modelformset_factory
 
@@ -45,6 +45,15 @@ def editgamebasic(request,id="-1"):
 	formset = GameForm(instance=game)
 	return render_to_response('unicorn/editgame_basic.html', {'topnav':'editgamebasic','game':game,'form':formset})
 
+def editgamecontact(request,id="-1"):
+	try:
+		game = Game.objects.get(id=id)
+	except Game.DoesNotExist:
+		return render_to_response('unicorn/gamesdoesnotexist.html')
+
+	formset = ContactForm(instance=game)
+	return render_to_response('unicorn/editgame_contact.html', {'topnav':'editgamecontact','game':game,'form':formset})
+
 def editgameplatforms(request,id="-1"):
 	try:
 		game = Game.objects.get(id=id)
@@ -66,18 +75,30 @@ def editgamecategories(request,id="-1"):
 		game = Game.objects.get(id=id)
 	except Game.DoesNotExist:
 		return render_to_response('unicorn/gamesdoesnotexist.html')
-	GameFormset = modelformset_factory(GameCategory,exclude=('short_description',))
 
-	formset = GameFormset()
-	return render_to_response('unicorn/editgame_categories.html', {'topnav':'editgamecategories','game':game,'formset':formset})
+	cats = []
+	for category in GameCategory.objects.all():
+		has = False
+		for c in game.categories.all():
+			if(c.id == category.id):
+				has = True
+		cats.append({'category':category,'has':has})
+
+	return render_to_response('unicorn/editgame_categories.html', {'topnav':'editgamemedia','game':game,'categories':cats})
 
 def editgamemedia(request,id="-1"):
 	try:
 		game = Game.objects.get(id=id)
 	except Game.DoesNotExist:
 		return render_to_response('unicorn/gamesdoesnotexist.html')
-	GameFormset = modelformset_factory(GameCategory,exclude=('short_description',))
 
-	formset = GameFormset()
-	return render_to_response('unicorn/editgame_categories.html', {'topnav':'editgamemedia','game':game,'formset':formset})
+	cats = []
+	for category in GameCategory.objects.all():
+		has = False
+		for c in game.categories:
+			if(c.id == category.id):
+				has = True
+		cats.append({'category':category,'has':has})
+
+	return render_to_response('unicorn/editgame_categories.html', {'topnav':'editgamemedia','game':game,'categories':cats})
 

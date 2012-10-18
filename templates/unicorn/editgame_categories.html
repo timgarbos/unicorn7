@@ -10,16 +10,13 @@
 
 <form action="/test/" method="post">
 
- {% for form in formset %}
+ {% for cat in categories %}
 
-
- {% for hidden in form.hidden_fields %}
-    {{ hidden }}
-    {% endfor %}
 
             <label class="checkbox">
-              <input type="checkbox"  > {{form.title.value}}
+              <input type="checkbox"  name="form-{{cat.category.id}}-id" id="id_form-{{cat.category.id}}-id" {% if cat.has %}checked {% endif %} >{{cat.category.title}}
             </label>
+            <input type="hidden" name="form-0-id" value="1" id="id_form-0-id">
     {% endfor %}
     <br/>
     <p>

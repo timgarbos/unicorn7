@@ -30,8 +30,9 @@ class Game(models.Model):
     short_credits = models.TextField('credits',help_text='Example: It was made by Tim Garbos and Julie Heyde. Thanks to Patrick for the moaning sound effects')
     video = models.URLField(help_text='Optional video (youtube, vimeo, etc) link',null=True,blank=True)
     twitter = models.CharField('twitter id',max_length=100,blank=True)
-    developer_url = models.URLField()
-    email = models.EmailField()
+    developer_url = models.URLField(null=True,blank=True)
+    facebook_page = models.URLField(null=True,blank=True)
+    email = models.EmailField(null=True,blank=True)
 
     users = models.ManyToManyField(User,null=True,blank=True)
     tags = TaggableManager(blank=True)
@@ -78,10 +79,10 @@ class GameImage(models.Model):
 class GameForm(ModelForm):
     class Meta:
         model = Game
-        exclude = ('pub_date','users','categories','platforms','video','twitter')
+        exclude = ('pub_date','users','categories','platforms','video','twitter','developer_url')
 
 class ContactForm(ModelForm):
     class Meta:
         model = Game
-        include = ('email','twitter','developer_url')
+        fields = ('email','twitter','developer_url','facebook_page')
 
