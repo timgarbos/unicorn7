@@ -70,10 +70,11 @@
 
      <ul class="nav nav-pills nav-stacked">
         <li class="nav-header"><h4>Play it</h4></li>
-      <li><a href="#">Play online</a></li>
-      <li><a href="#">Download (PC)</a></li>
-        <li><a href="#">Download (Mac)</a></li>
-         <li><a href="#">Download (Linux)</a></li>
+       {% for plat in game.platforms.all %}
+        {% if plat.url and plat.url.strip %}
+        <li><a href="{{plat.url}}">{{plat.platform}}</a></li>
+        {% endif %}
+      {% endfor %}
     
     
        </ul>
@@ -144,6 +145,36 @@
 
 
 </div>
+
+
+
+<div class="well" >
+
+<ul class="nav nav-pills  nav-stacked">
+     <li class="nav-header"><h4>Team info</h4></li>
+      
+        {% if game.developer_url and game.developer_url.strip %}
+        <li><a href="{{game.developer_url}}">Developer</a></li>
+        {% endif %}
+
+        {% if game.email and game.email.strip %}
+        <li><a href="mailto://{{game.email}}">Email</a></li>
+        {% endif %}
+
+        {% if game.twitter_id and game.twitter_id.strip %}
+        <li><a href="https://twitter.com/{{game.twitter_id}}">Twitter</a></li>
+        {% endif %}
+
+        {% if game.facebook_page and game.facebook_page.strip %}
+        <li><a href="{{game.facebook_page}}">Facebook</a></li>
+        {% endif %}
+      </ul>
+  </div>
+
+
+</div>
+
+
 
 </div>
 
