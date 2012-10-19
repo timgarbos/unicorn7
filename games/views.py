@@ -2,13 +2,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from games.models import Game, GameForm,GamePlatform,GameCategory,GamePlatformLink,ContactForm
+from games.models import Game, GameForm,GamePlatform,GameCategory,GamePlatformLink,ContactForm,GameSubmitForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import modelformset_factory
 
 
 def listgames(request):
-	game_list = Game.objects.all()
+	game_list = Game.objects.all().filter(status=Game.LIVE_STATUS)
 	paginator = Paginator(game_list, 20)
 	page = request.GET.get('page')
 	try:
@@ -23,10 +23,45 @@ def listgames(request):
 	platforms = GamePlatform.objects.all()
 	return render_to_response('unicorn/games.html', {'topnav':'listgames','games':games,'categories':categories,'platforms':platforms})
   
-@login_required  
-def submit(request):
-    return render_to_response('unicorn/submitgames.html', {'topnav':'submit'})
-    
+#@login_required  
+def submitgamebasic(request):
+	formset = GameSubmitForm()
+	return render_to_response('unicorn/submitgame_basic.html', {'topnav':'submitgamebasic','form':formset})
+
+#@login_required  
+def submitgameplatforms(request,id="-1"):
+	try:
+		game = Game.objects.get(id=id)
+	except Game.DoesNotExist:
+		return render_to_response('unicorn/gamesdoesnotexist.html')
+	links = []
+	for platform in GamePlatform.objects.all():
+		link = GamePlatformLink(platform=platform,game=game)
+		links.append({'platform':link.platform,'url':link.url})
+
+	return render_to_response('unicorn/submitgame_links.html', {'topnav':'submitgameplatforms','game':game,'links':links})
+
+#@login_required  
+def submitgamecategories(request,id="-1"):
+	try:
+		game = Game.objects.get(id=id)
+	except Game.DoesNotExist:
+		return render_to_response('unicorn/gamesdoesnotexist.html')
+
+	cats = []
+	for category in GameCategory.objects.all():
+		has = False
+		cats.append({'category':category,'has':has})
+
+	return render_to_response('unicorn/submitgame_categories.html', {'topnav':'submitgamemedia','game':game,'categories':cats})
+
+#@login_required  
+def submitgamecontact(request):
+	formset = ContactForm()
+	return render_to_response('unicorn/submitgame_contact.html', {'topnav':'submitgamecontact','game':game,'form':formset})
+
+
+
     
 def showgame(request,id="-1"):
 	try:

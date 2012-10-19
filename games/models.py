@@ -23,6 +23,16 @@ class GamePlatform(models.Model):
 
 
 class Game(models.Model):
+    LIVE_STATUS = 1
+    DRAFT_STATUS = 2
+    HIDDEN_STATUS = 3
+    STATUS_CHOICES = (
+        (LIVE_STATUS, 'Live'),
+        (DRAFT_STATUS, 'Draft'),
+        (HIDDEN_STATUS, 'Hidden'),
+    )
+    status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS)
+
     title = models.CharField(max_length=130)
     pub_date = models.DateTimeField('date published')
     short_description = models.CharField('Short teaser',max_length=130,help_text='Example: This is an erotic rythm game. Do not miss this')
@@ -34,11 +44,14 @@ class Game(models.Model):
     facebook_page = models.URLField(null=True,blank=True)
     email = models.EmailField(null=True,blank=True)
 
+
     users = models.ManyToManyField(User,null=True,blank=True)
     tags = TaggableManager(blank=True)
 
     categories = models.ManyToManyField(GameCategory,null=True,blank=True)
     platforms = models.ManyToManyField(GamePlatform, through='GamePlatformLink',null=True,blank=True)
+
+
     def __unicode__(self):
         return self.title
 
@@ -79,7 +92,12 @@ class GameImage(models.Model):
 class GameForm(ModelForm):
     class Meta:
         model = Game
-        exclude = ('pub_date','users','categories','platforms','video','twitter','developer_url')
+        exclude = ('pub_date','users','categories','platforms','video','twitter','developer_url','facebook_page','email')
+
+class GameSubmitForm(ModelForm):
+    class Meta:
+        model = Game
+        exclude = ('pub_date','users','categories','platforms','video','twitter','developer_url','status','facebook_page','email')
 
 class ContactForm(ModelForm):
     class Meta:

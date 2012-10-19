@@ -56,7 +56,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li  class="{% navactive topnav 'listgames' %}"><a href="{% url 'games.views.listgames' %}">Explore</a></li>
-                            <li class="{% navactive topnav 'submit' %}"><a href="#">Submit</a></li>
+                            <li class="{% navactive topnav 'submit' %}"><a href="{% url 'games.views.submitgamebasic' %}">Submit</a></li>
 
                             <li><form class="navbar-search pull-left">
   <input type="text" class="search-query" placeholder="Search">
