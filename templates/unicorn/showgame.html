@@ -38,7 +38,7 @@
     <div class="well">
       <h3>Description</h3>
       {% oembed %}
-      <p>{{ game.short_description }}</p>
+      <p>{{ game.long_description }}</p>
       {% endoembed %}
    </div>
 
@@ -70,10 +70,9 @@
 
      <ul class="nav nav-pills nav-stacked">
         <li class="nav-header"><h4>Play it</h4></li>
-       {% for plat in game.platforms.all %}
-        {% if plat.url and plat.url.strip %}
+       {% for plat in platforms %}
         <li><a href="{{plat.url}}">{{plat.platform}}</a></li>
-        {% endif %}
+
       {% endfor %}
     
     
@@ -144,7 +143,7 @@
   </div>
 
 
-</div>
+
 
 
 
@@ -173,7 +172,7 @@
 
 
 </div>
-
+</div>
 
 
 </div>

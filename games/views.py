@@ -68,7 +68,9 @@ def showgame(request,id="-1"):
 		game = Game.objects.get(id=id)
 	except Game.DoesNotExist:
 		return render_to_response('unicorn/gamesdoesnotexist.html')
-	return render_to_response('unicorn/showgame.html', {'topnav':'showgame','game':game})
+
+	platforms = GamePlatformLink.objects.filter(game=game)
+	return render_to_response('unicorn/showgame.html', {'topnav':'showgame','game':game,'platforms':platforms})
 
 
 def editgamebasic(request,id="-1"):
