@@ -8,9 +8,10 @@
       <h3>Basic info</h3>
 
 
-<form action="/test/" method="post">
+<form action="{% url 'games.views.submitgamebasic' %}" method="post">
 
- 
+  {% csrf_token %}
+
  {% for hidden in form.hidden_fields %}
     {{ hidden }}
     {% endfor %}
@@ -19,8 +20,10 @@
     
          {{ field.label_tag }}
           
-            <p class="text-error">{{ field.errorslist}}</p>
-             
+            {% for error in field.errors %}
+            <p class="text-error">{{ error}}</p>
+             {% endfor %}
+
              {{ field }}
         <span class="help-block muted"><small>{{ field.help_text }}</small></span>
 

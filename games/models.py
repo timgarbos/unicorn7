@@ -8,7 +8,7 @@ from django.forms import ModelForm
 
 class GameCategory(models.Model):
     title = models.CharField(max_length=200)
-    short_description = models.CharField(max_length=255,help_text='internal note: Why do we have this category? ')
+    short_description = models.CharField(null=True,blank=True,max_length=255,help_text='internal note: Why do we have this category? ')
 
     def __unicode__(self):
         return self.title
@@ -18,9 +18,6 @@ class GamePlatform(models.Model):
 
     def __unicode__(self):
         return self.title
-
-
-
 
 class Game(models.Model):
     LIVE_STATUS = 1
@@ -34,10 +31,12 @@ class Game(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS)
 
     title = models.CharField(max_length=130)
-    pub_date = models.DateTimeField('date published')
+    #creator = models.ForeignKey(User,null=True,blank=True)
+    pub_date = models.DateTimeField('date created',auto_now=False, auto_now_add=True)
+    modified_date = models.DateTimeField('date created',auto_now=True, auto_now_add=False)
     short_description = models.CharField('Short teaser',max_length=130,help_text='Example: This is an erotic rythm game. Do not miss this')
     long_description = models.TextField('description',help_text='Example: it is a game about ... and it is great because of ... you should try it out. (if you would want to write the story of your life then this is the place)')
-    short_credits = models.TextField('credits',help_text='Example: It was made by Tim Garbos and Julie Heyde. Thanks to Patrick for the moaning sound effects')
+    short_credits = models.TextField('credits',blank=True,null=True,help_text='Example: It was made by Tim Garbos and Julie Heyde. Thanks to Patrick for the moaning sound effects')
     video = models.URLField(help_text='Optional video (youtube, vimeo, etc) link',null=True,blank=True)
     twitter = models.CharField('twitter id',max_length=100,blank=True)
     developer_url = models.URLField(null=True,blank=True)

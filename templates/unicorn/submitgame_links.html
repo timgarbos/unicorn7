@@ -1,4 +1,4 @@
-{% extends "unicorn/editgame.html" %}
+{% extends "unicorn/submitgame.html" %}
 {% load oembed_tags %}
 
 {% block editContent %}
@@ -9,8 +9,8 @@
       <p>These links will be showed on the games page for easy access to download/play the game on different platforms. It will also be possible to sort/search the games based on available platforms.
       Just leave the URL field empty to not include a platform<br/><br/></p>
 
-<form action="/test/" method="post">
-
+<form action="{% url 'games.views.submitgameplatforms' id=game.id %}" method="post">
+{% csrf_token %}
  {% for link in links %}
 
           <label>{{link.platform.title}} URL:</label>

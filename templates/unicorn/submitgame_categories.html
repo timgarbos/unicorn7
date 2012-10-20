@@ -8,8 +8,8 @@
       <h3>Edit categories</h3>
       <p>Select some relevant categories. If a category is missing let us know on: <a href="mailto://web@unicorn7.org"> web@unicorn7.org </a> or just tweet to @unicorn7ish. <br/><br/></p>
 
-<form action="/test/" method="post">
-
+<form action="{% url 'games.views.submitgamecategories' id=game.id %}" method="post">
+{% csrf_token %}
  {% for cat in categories %}
 
 

@@ -38,6 +38,24 @@
 
 <div class="span10">
     
+
+  {% if success %}
+      <div class="alert alert-success">
+
+        <button type="button" class="close" data-dismiss="alert">×</button>
+  <p  ><strong>Great Job! </strong> The data was saved successfully! You can take a break and get a cup of coffe or something nice. </p>
+  </div>
+  {% endif %}
+
+  {% if error %}
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <p > <strong>Oh no! </strong> Something was not valid. This could be a small unicorn</p>
+  </div>
+  {% endif %}
+
+
+
     <div class="well">
     {% block editContent %}
     {% endblock %}

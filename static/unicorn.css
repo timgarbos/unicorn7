@@ -1,21 +1,54 @@
 body
 {
-	#background-image: url('/static/bg.png');
+	background-image:url('footer.PNG');
+	background-repeat:repeat-x;
+	background-attachment:scroll;
+	background-position:center bottom; 
+}
+footer
+{
+	height:20px;
+	text-align:center;
+}
+footer p
+{
+
+	margin-top:300px;
 }
 
+.play-it
+{
+	background-image:url('hest2.PNG');
+	width:120px;
+	height:175px;
+	background-position:center bottom; 
+	margin-bottom:-20px;
+	margin-top:-120px;
+	margin-left:10px;
+
+}
 .full-width
 {
 	width:100%;
+}
+.thumbnail .caption h5, .thumbnail .caption p
+{
+	overflow:hidden;
 }
 .margin10
 {
 	margin-top:10px;
 	margin-bottom: 10px;
 }
-.well
+.well-error
 {
-	
+	background-color: #B94A48;
 }
+.well-success
+{
+	background-color: #468847;
+}
+
 h1 {
   font-size: 50px;
   line-height: 50px;

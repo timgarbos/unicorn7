@@ -31,32 +31,34 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
 
- <div class="fb-like" data-href="http://unicorn7.org" data-send="false"  data-show-faces="false"></div>
+ <div class="fb-like" data-href="http://unicorn7.org" data-send="false"  data-show-faces="false" data-width="100" style="width:100px;"></div>
 
    </div>
 
     <div class="well">
       <h3>Description</h3>
       {% oembed %}
-      <p>{{ game.long_description }}</p>
+      <p>{{ game.long_description|linebreaksbr }}</p>
       {% endoembed %}
    </div>
 
+{% if game.short_credits and game.short_credits.strip %}
   <div class="well">
       <h3>Credits</h3>
       {% oembed %}
-      <p>{{ game.short_credits }}</p>
+      <p>{{ game.short_credits|linebreaksbr }}</p>
       {% endoembed %}
       <ul>
       	{#% url profile u.id %#}
       </ul>
   </div>
+  {% endif %}
     
 </div>
 
 <div class="span4">
     
-
+  {% if showEditOptions %}
           <div class="well" >
 
      <ul class="nav nav-pills nav-stacked">
@@ -66,6 +68,9 @@
        </ul>
      </div>
 
+ {% endif %}
+ 
+     <div class="play-it"> </div>
       <div class="well" >
 
      <ul class="nav nav-pills nav-stacked">
@@ -81,14 +86,6 @@
      <div class="well" >
       <ul class="nav nav-pills nav-stacked">
      <li class="nav-header"><h4>Rating</h4></li>
-
-     <li class="nav-header">Overall</li>
-    <li> 
-      <div class="progress progress-warning progress-striped">
-        <div class="bar" style="width: 20%"></div>
-      </div>
-    </li>
-
 
     <li class="nav-header">Fun</li>
     <li> 
@@ -160,8 +157,8 @@
         <li><a href="mailto://{{game.email}}">Email</a></li>
         {% endif %}
 
-        {% if game.twitter_id and game.twitter_id.strip %}
-        <li><a href="https://twitter.com/{{game.twitter_id}}">Twitter</a></li>
+        {% if game.twitter and game.twitter.strip %}
+        <li><a href="https://twitter.com/{{game.twitter}}">Twitter</a></li>
         {% endif %}
 
         {% if game.facebook_page and game.facebook_page.strip %}

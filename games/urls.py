@@ -4,6 +4,13 @@ urlpatterns = patterns('',
     # Examples:
     url(r'list/$', 'games.views.listgames'),
     url(r'submitgamebasic/$', 'games.views.submitgamebasic'),
+    url(r'submitgameplatforms/(?P<id>\d+)/$', 'games.views.submitgameplatforms'),
+    url(r'submitgamecategories/(?P<id>\d+)/$', 'games.views.submitgamecategories'),
+    url(r'submitgamemedia/(?P<id>\d+)/$', 'games.views.submitgamemedia'),
+    url(r'submitgamecontact/(?P<id>\d+)/$', 'games.views.submitgamecontact'),
+    url(r'submitgamepublish/(?P<id>\d+)/$', 'games.views.submitgamepublish'),
+    url(r'submitgamepublished/(?P<id>\d+)/$', 'games.views.submitgamepublished'),
+
     url(r'game/(?P<id>\d+)/$', 'games.views.showgame'),
     url(r'editgamebasic/(?P<id>\d+)/$', 'games.views.editgamebasic'),
     url(r'editgameplatforms/(?P<id>\d+)/$', 'games.views.editgameplatforms'),
