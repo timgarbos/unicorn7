@@ -20,13 +20,25 @@ footer p
 {
 	background-image:url('hest2.PNG');
 	width:120px;
-	height:175px;
+	height:199px;
 	background-position:center bottom; 
-	margin-bottom:-20px;
-	margin-top:-120px;
+	
 	margin-left:10px;
 
 }
+
+.sort-it
+{
+	background-image:url('hest3.PNG');
+	width:100px;
+	height:166px;
+	background-position:center bottom; 
+	margin-bottom:-20px;
+	margin-top:-10px;
+	margin-left:50px;
+
+}
+
 .full-width
 {
 	width:100%;
