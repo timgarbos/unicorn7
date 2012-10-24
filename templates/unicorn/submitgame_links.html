@@ -14,14 +14,14 @@
  {% for link in links %}
 
           <label>{{link.platform.title}} URL:</label>
-           <input id="id_form-{{link.id}}-url" type="text" name="form-{{link.id}}-url" maxlength="200" value="{{link.url}}">
+           <input id="{{link.id}}" type="text" name="{{link.id}}" maxlength="200" value="{{link.url}}">
        <br/><br/>
 
    
 
     {% endfor %}
     <p>
-  <button type="submit" class="btn-primary">Save</button>
+  <button type="submit" class="btn-primary">Next</button>
 </p>
 </form>
 

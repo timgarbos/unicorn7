@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
-    # Examples:
     url(r'list/$', 'games.views.listgames'),
     url(r'submitgamebasic/$', 'games.views.submitgamebasic'),
     url(r'submitgameplatforms/(?P<id>\d+)/$', 'games.views.submitgameplatforms'),
@@ -17,5 +16,10 @@ urlpatterns = patterns('',
     url(r'editgamecategories/(?P<id>\d+)/$', 'games.views.editgamecategories'),
     url(r'editgamemedia/(?P<id>\d+)/$', 'games.views.editgamemedia'),
     url(r'editgamecontact/(?P<id>\d+)/$', 'games.views.editgamecontact'),
+
+
+
+    url(r'rategame/(?P<id>\d+)/(?P<type>\d+)/$', 'games.views.rategame'),
+
 
 )

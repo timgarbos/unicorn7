@@ -1,9 +1,38 @@
+
+h1,h2,h3,h4,h5, .hero-unit h1
+{
+	color:#2E9FF8;
+}
+.navbar-inverse .navbar-inner .brand, .navbar-inverse .nav > li > a , .navbar-search .search-query
+{
+color: #2E9FF8;
+
+}
 body
 {
+
+	background-image:url('img/subtle_dots.png');
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+.thumbnail
+{
+	background-color: #f5f5f5;
+}
+.bgimage
+{
+	
 	background-image:url('footer.PNG');
 	background-repeat:repeat-x;
 	background-attachment:scroll;
 	background-position:center bottom; 
+	margin:0;
+	padding:0;
+
+}
+.well
+{
+	
 }
 footer
 {

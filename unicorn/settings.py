@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'oembed',
     #'profiles',
+    'djangoratings',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
@@ -168,7 +169,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.twitter',
     'django.core.paginator',
 )
-
+RATINGS_VOTES_PER_IP = 15
 AUTH_PROFILE_MODULE = 'userprofiles.UserProfile'
 FORCE_SCRIPT_NAME = ''
 # A sample logging configuration. The only tangible logging

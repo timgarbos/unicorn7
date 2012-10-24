@@ -8,9 +8,9 @@
   <div class="span12">
     
     
-    <h1>{{ game.title }}</h1>
+    <h1>Bam! It's done!</h1>
      <p>
-    <h2><small>submitted {{ game.pub_date|date:"M d, Y" }} by blah</small></h2>
+    <h2><small>You are now a unicorn!</small></h2>
     </p>
   </div>
   </div>
@@ -23,12 +23,12 @@
          <h3>Wooohooo!!</h3>
      
       <p>
-        Woohooo!! It is submitted! You are now a unicorn!
+        Woohooo!! It is submitted! 
 
 <br/><br/>
         View your game here: <a href="{% url 'games.views.showgame' id=game.id %}">{{game.title}}</a>
 <br/>
-        You can always edit the inforamtion later.
+
       </p>
 
   </div>

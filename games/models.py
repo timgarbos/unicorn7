@@ -2,6 +2,7 @@ from django.db import models
 from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from djangoratings.fields import RatingField
 
 
 # Create your models here.
@@ -50,6 +51,12 @@ class Game(models.Model):
     categories = models.ManyToManyField(GameCategory,null=True,blank=True)
     platforms = models.ManyToManyField(GamePlatform, through='GamePlatformLink',null=True,blank=True)
 
+
+    rating_fun = RatingField(range=5,allow_anonymous=True)
+    rating_novelty = RatingField(range=5,allow_anonymous=True)
+    rating_humour = RatingField(range=5,allow_anonymous=True)
+    rating_visuals = RatingField(range=5,allow_anonymous=True)
+    rating_audio = RatingField(range=5,allow_anonymous=True)
 
     def __unicode__(self):
         return self.title

@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from djangoratings.views import AddRatingFromModel
 
 
 def listgames(request):
@@ -165,8 +166,6 @@ def submitgamepublished(request,id="-1"):
 	context['game'] = game;
 	return render_to_response('unicorn/submitgame_published.html', context,context_instance=RequestContext(request))
 
-def submitgamemedia(request,id="-1"):
-	return render_to_response('unicorn/submitgame_categories.html', )
     
 def showgame(request,id="-1"):
 	try:
@@ -299,3 +298,31 @@ def editgamemedia(request,id="-1"):
 
 	return render_to_response('unicorn/editgame_categories.html', {'topnav':'editgamemedia','game':game,'categories':cats})
 
+def rategame(request,id="-1",type="-1"):
+
+
+	if request.method == 'GET': 
+		rate = request.GET['rate']
+		field = ''
+		if type=='0':
+			field = 'rating_fun'
+		if type=='1':
+			field = 'rating_novelty'
+		if type=='2':
+			field = 'rating_humour'
+		if type=='3':
+			field = 'rating_visuals'
+		if type=='4':
+			field = 'rating_audio'
+
+		params = {
+		    'model': 'game',
+		    'object_id': id,
+		    'app_label': 'games',
+		    'field_name': field, # this should match the field name defined in your model
+		    'score': rate, # the score value they're sending
+		}
+		response = AddRatingFromModel()(request, **params)
+		
+		return HttpResponse(content=response.content)
+	return HttpResponse(content='')
