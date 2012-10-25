@@ -13,11 +13,18 @@ body
 
 	background-image:url('img/subtle_dots.png');
 	margin-bottom: 0;
-	padding-bottom: 0;
+
+	padding-bottom:0;
+	padding-left: 0;
+	padding-right: 0;
 }
 .thumbnail
 {
 	background-color: #f5f5f5;
+}
+.rating-header h4
+{
+	font-size: 14px;
 }
 .bgimage
 {
@@ -36,7 +43,7 @@ body
 }
 footer
 {
-	height:20px;
+	height:80px;
 	text-align:center;
 }
 footer p
@@ -48,24 +55,24 @@ footer p
 .play-it
 {
 	background-image:url('hest2.PNG');
-	width:120px;
-	height:175px;
+	width:60px;
+	height:87px;
 	background-position:center bottom; 
-	margin-bottom:-15px;
-	margin-top:-120px;
-	margin-left:30px;
+	margin-bottom:-5px;
+	margin-top:-60px;
+	margin-left:20px;
 
 }
 
 .sort-it
 {
 	background-image:url('hest3.PNG');
-	width:100px;
-	height:166px;
+	width:60px;
+	height:99px;
 	background-position:center bottom; 
-	margin-bottom:-20px;
+	margin-bottom:-15px;
 	margin-top:-10px;
-	margin-left:50px;
+	margin-left:70px;
 
 }
 

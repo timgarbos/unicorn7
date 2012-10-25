@@ -12,7 +12,7 @@
 	$.fn.jRating = function(op) {
 		var defaults = {
 			/** String vars **/
-			bigStarsPath : 'jquery/icons/stars.png', // path of the icon stars.png
+			bigStarsPath : 'jquery/icons/heart3.PNG', // path of the icon stars.png
 			smallStarsPath : 'jquery/icons/small.png', // path of the icon small.png
 			phpPath : 'php/jRating.php', // path of the php file jRating.php
 			type : 'big', // can be set to 'small' or 'big'
@@ -195,8 +195,8 @@
 						bgPath = opts.smallStarsPath;
 					break;
 					default :
-						starWidth = 23; // width of the picture stars.png
-						starHeight = 20; // height of the picture stars.png
+						starWidth = 42; // width of the picture stars.png
+						starHeight = 36; // height of the picture stars.png
 						bgPath = opts.bigStarsPath;
 				}
 			};

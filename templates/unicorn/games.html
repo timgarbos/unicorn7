@@ -2,6 +2,8 @@
 
 {% block content %}
 {% load url from future %}
+{% load navigation %}
+
 <div class="row">
 <div class="span3">
 
@@ -31,18 +33,9 @@
               
 
               {% for game in games %}
-              <li class="game-list-item pull-left">
-                <a href="{% url 'games.views.showgame' id=game.id %}" class="no-decoration">
-                <div class="thumbnail">
-                  <img src="http://placehold.it/230x200" alt="" class="img-rounded">
-                  <div class="caption">
-                    <h5>{{ game.title }}</h5>
-                    <p><small>{{ game.short_description|truncatechars:140 }}</small></p>
-                    
-                  </div>
-                </div>
-              </a>
-              </li>
+         
+                {% showgamethumbnail game  %}
+               
               {% endfor %}
 
 

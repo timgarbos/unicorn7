@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+{% load navigation %}
+
 
 {% block content %}
 
 <div class="row">
-	 <div class="span12">
+	 <div class="span10">
   <div class="hero-unit">
     <h1>How to Unicorn?</h1>
     <p>Some catchy text convincing people to turn into unicorns. Being a unicorn is great!
@@ -17,8 +19,18 @@
 
  
 <div class="row">
-    <div class="span12">
-    <h2>Latest games </h2>
+    <div class="span10">
+            <ul class="thumbnails">
+              
+
+              {% for game in games %}
+         
+                {% showgamethumbnail game  %}
+               
+              {% endfor %}
+
+
+ </ul>
     
     </div>
 </div>

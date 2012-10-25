@@ -35,12 +35,12 @@
     </div>
 
    <div class="margin10">
-    
-     <a href="https://twitter.com/share" class="twitter-share-button" data-via="unicorn7ish">Tweet</a>
+
+     <a href="https://twitter.com/share" class="twitter-share-button" data-text="Found something that's worth playing {{ request.build_absolute_uri }} "  data-via="unicorn7ish">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
 
- <div class="fb-like" data-href="http://unicorn7.org" data-send="false"  data-show-faces="false" data-width="100" style="width:100px;"></div>
+ <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-send="false"  data-show-faces="false" data-width="100" style="width:100px;"></div>
 
    </div>
 
@@ -88,13 +88,21 @@
 
 <div class="span4">
     
+      {% if showAdminOptions %}
+          <div class="well" >
+
+     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#">Feature game</a></li>
+       </ul>
+     </div>
+
+ {% endif %}
+
   {% if showEditOptions %}
           <div class="well" >
 
      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-header"><h4>Edit</h4></li>
       <li><a href="{% url 'games.views.editgamebasic' id=game.id %}">Edit game</a></li>
-      <li><a href="#">Feature game</a></li>
        </ul>
      </div>
 
@@ -115,31 +123,31 @@
      </div>
      <div class="well" >
       <ul class="nav nav-pills nav-stacked">
-     <li class="nav-header"><h4>Rating</h4></li>
+    
 
-    <li class="nav-header">Fun</li>
+    <li class="nav-header rating-header"><h4>Fun:</h4></li>
     <li> 
-      <div class="rating_fun" id="{{game.rating_fun.score}}_{{game.id}}_0"></div>
+      <div class="rating rating_fun" id="{{game.rating_fun.score}}_{{game.id}}_0"></div>
     </li>
 
-    <li class="nav-header">Novelty</li>
+    <li class="nav-header rating-header"><h4>Novelty:</h4></li>
     <li> 
-      <div class="rating_novelty" id="{{game.rating_novelty.score}}_{{game.id}}_1"></div>
+      <div class="rating rating_novelty" id="{{game.rating_novelty.score}}_{{game.id}}_1"></div>
     </li>
 
-    <li class="nav-header">Humour</li>
+    <li class="nav-header rating-header"><h4>Humour:</h4></li>
     <li> 
-      <div class="rating_humour" id="{{game.rating_humour.score}}_{{game.id}}_2"></div>
+      <div class="rating rating_humour" id="{{game.rating_humour.score}}_{{game.id}}_2"></div>
     </li>
 
-    <li class="nav-header">Visuals</li>
+    <li class="nav-header rating-header"><h4>Visuals:</h4></li>
     <li> 
-      <div class="rating_visuals" id="{{game.rating_visuals.score}}_{{game.id}}_3"></div>
+      <div class="rating rating_visuals" id="{{game.rating_visuals.score}}_{{game.id}}_3"></div>
     </li>
 
-    <li class="nav-header">Audio</li>
+    <li class="nav-header rating-header"><h4>Audio:</h4></li>
     <li> 
-      <div class="rating_audio" id="{{game.rating_audio.score}}_{{game.id}}_4"></div>
+      <div class="rating rating_audio" id="{{game.rating_audio.score}}_{{game.id}}_4"></div>
       </li>
       <li>
       
@@ -213,7 +221,7 @@ $(document).ready(function(){
       $(".rating_fun").jRating({
         phpPath:'{% url 'games.views.rategame' id=game.id type=0 %}',
           type: 'big',
-          bigStarsPath:'/static/js/rating/icons/stars.png',
+          bigStarsPath:'/static/js/rating/icons/heart3.PNG',
          step:true,
          length : 5, // nb of stars
          rateMax:5,
@@ -223,7 +231,7 @@ $(document).ready(function(){
             $(".rating_novelty").jRating({
         phpPath:'{% url 'games.views.rategame' id=game.id type=1 %}',
           type: 'big',
-          bigStarsPath:'/static/js/rating/icons/stars.png',
+          bigStarsPath:'/static/js/rating/icons/heart3.PNG',
          step:true,
          length : 5, // nb of stars
          rateMax:5,
@@ -234,7 +242,7 @@ $(document).ready(function(){
        $(".rating_humour").jRating({
         phpPath:'{% url 'games.views.rategame' id=game.id type=2 %}',
           type: 'big',
-          bigStarsPath:'/static/js/rating/icons/stars.png',
+          bigStarsPath:'/static/js/rating/icons/heart3.PNG',
          step:true,
          length : 5, // nb of stars
          rateMax:5,
@@ -245,7 +253,7 @@ $(document).ready(function(){
       $(".rating_visuals").jRating({
         phpPath:'{% url 'games.views.rategame' id=game.id type=3 %}',
           type: 'big',
-          bigStarsPath:'/static/js/rating/icons/stars.png',
+          bigStarsPath:'/static/js/rating/icons/heart3.PNG',
          step:true,
          length : 5, // nb of stars
          rateMax:5,
@@ -256,7 +264,7 @@ $(document).ready(function(){
       $(".rating_audio").jRating({
         phpPath:'{% url 'games.views.rategame' id=game.id type=4 %}',
           type: 'big',
-          bigStarsPath:'/static/js/rating/icons/stars.png',
+          bigStarsPath:'/static/js/rating/icons/heart3.PNG',
          step:true,
          length : 5, // nb of stars
          rateMax:5,

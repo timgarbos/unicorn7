@@ -172,9 +172,11 @@ def showgame(request,id="-1"):
 		game = Game.objects.get(id=id)
 	except Game.DoesNotExist:
 		return render_to_response('unicorn/gamesdoesnotexist.html')
-
+	showEdit = True
 	platforms = GamePlatformLink.objects.filter(game=game)
-	return render_to_response('unicorn/showgame.html', {'topnav':'showgame','game':game,'platforms':platforms})
+	return render_to_response('unicorn/showgame.html', {'topnav':'showgame','game':game,'platforms':platforms,'showEditOptions':showEdit},context_instance=RequestContext(request))
+
+
 
 @csrf_protect
 def editgamebasic(request,id="-1"):

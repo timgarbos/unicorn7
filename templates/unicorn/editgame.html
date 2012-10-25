@@ -11,7 +11,7 @@
     
     <h1>Edit: {{ game.title }}</h1>
      <p>
-    <h2><small>submitted {{ game.pub_date|date:"M d, Y" }} by timgarbos</small></h2>
+    <h2><small>Make your game page even greater!</small></h2>
     </p>
   </div>
   </div>
@@ -29,6 +29,8 @@
       <li class="{% navactive topnav 'editgameplatforms' %}"><a href="{% url 'games.views.editgameplatforms' id=game.id %}">Platforms</a></li>
       <li class="{% navactive topnav 'editgamecategories' %}"><a href="{% url 'games.views.editgamecategories' id=game.id %}">Categories</a></li>
       <li class="{% navactive topnav 'editgamecontact' %}"><a href="{% url 'games.views.editgamecontact' id=game.id %}">Contact</a></li>
+      <li ><a href="{% url 'games.views.showgame' id=game.id %}">View game</a></li>
+
 
     </ul>
     
