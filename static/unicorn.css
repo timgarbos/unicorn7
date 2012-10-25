@@ -37,9 +37,19 @@ body
 	padding:0;
 
 }
+.well h3, .well h4,.well h2, .well h5
+{
+	margin-top:0;
+
+}
+.well h3
+{
+	line-height: 30px;
+	
+}
 .well
 {
-	
+	padding:10px;
 }
 footer
 {
@@ -83,6 +93,14 @@ footer p
 .thumbnail .caption h5, .thumbnail .caption p
 {
 	overflow:hidden;
+}
+.thumbnail .caption h5
+{
+	margin-top:0;
+}
+.thumbnail p
+{
+	margin-bottom:0;
 }
 .margin10
 {

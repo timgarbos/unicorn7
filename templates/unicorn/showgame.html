@@ -110,9 +110,9 @@
  
      <div class="play-it"> </div>
       <div class="well" >
-
+<h4>Play it</h4>
      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-header"><h4>Play it</h4></li>
+       
        {% for plat in platforms %}
         <li><a href="{{plat.url}}">{{plat.platform}}</a></li>
 
@@ -161,9 +161,9 @@
 </div>
 
 <div class="well" >
-
+<h4>Categories</h4>
 <ul class="nav nav-pills  nav-stacked">
-     <li class="nav-header"><h4>Categories</h4></li>
+    
       {% for cat in game.categories.all %}
         <li><a href="#">{{cat.title}}</a></li>
       {% endfor %}
@@ -176,9 +176,9 @@
 
 
 <div class="well" >
-
+<h4>Team info</h4>
 <ul class="nav nav-pills  nav-stacked">
-     <li class="nav-header"><h4>Team info</h4></li>
+     
       
         {% if game.developer_url and game.developer_url.strip %}
         <li><a href="{{game.developer_url}}">Developer</a></li>
