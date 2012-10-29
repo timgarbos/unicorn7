@@ -20,6 +20,15 @@ class GamePlatform(models.Model):
     def __unicode__(self):
         return self.title
 
+
+class GameJam(models.Model):
+    title = models.CharField(max_length=130)
+    long_description = models.TextField('description',help_text='Example: The coziest game jam in the world.')
+    
+    def __unicode__(self):
+        return self.title
+
+
 class Game(models.Model):
     LIVE_STATUS = 1
     DRAFT_STATUS = 2
@@ -58,6 +67,9 @@ class Game(models.Model):
     rating_visuals = RatingField(range=5,allow_anonymous=True)
     rating_audio = RatingField(range=5,allow_anonymous=True)
 
+
+    jam = models.ForeignKey(GameJam,null=True,blank=True)
+
     def __unicode__(self):
         return self.title
 
@@ -70,6 +82,7 @@ class Game(models.Model):
         # add default links
 
         return game
+
 
 
 class GamePlatformLink(models.Model):

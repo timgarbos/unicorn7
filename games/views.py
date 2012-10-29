@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from games.models import Game, GameForm,GamePlatform,GameCategory,GamePlatformLink,ContactForm,GameSubmitForm
+from games.models import Game, GameForm,GamePlatform,GameCategory,GamePlatformLink,ContactForm,GameSubmitForm,GameJam
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import modelformset_factory
 from django.views.decorators.csrf import csrf_protect
@@ -13,7 +13,43 @@ from djangoratings.views import AddRatingFromModel
 
 
 def listgames(request):
-	game_list = Game.objects.all().filter(status=Game.LIVE_STATUS)
+	sorting = None
+	category = None
+	platform = None
+	search = None
+
+	game_list = Game.objects.filter(status=Game.LIVE_STATUS)
+
+	if 'sorting' in request.GET:
+		sorting=request.GET['sorting']
+		if sorting == '0':
+			game_list = game_list.order_by('-pub_date')
+		if sorting == '1': #rating_fun
+			game_list = game_list.extra(select={'rating': '((100/%s*rating_fun_score/(rating_fun_votes+%s))+100)/2' % (Game.rating_fun.range, Game.rating_fun.weight)})
+			game_list = game_list.order_by('rating')
+		if sorting == '2': #rating_novelty
+			game_list = game_list.extra(select={'rating': '((100/%s*rating_novelty_score/(rating_novelty_votes+%s))+100)/2' % (Game.rating_novelty.range, Game.rating_novelty.weight)})
+			game_list = game_list.order_by('rating')
+		if sorting == '3': #rating_humour
+			game_list = game_list.extra(select={'rating': '((100/%s*rating_humour_score/(rating_humour_votes+%s))+100)/2' % (Game.rating_humour.range, Game.rating_humour.weight)})
+			game_list = game_list.order_by('rating')
+		if sorting == '4': #rating_visuals
+			game_list = game_list.extra(select={'rating': '((100/%s*rating_visuals_score/(rating_visuals_votes+%s))+100)/2' % (Game.rating_visuals.range, Game.rating_visuals.weight)})
+			game_list = game_list.order_by('rating')
+		if sorting == '5': #rating_audio
+			game_list = game_list.extra(select={'rating': '((100/%s*rating_audio_score/(rating_audio_votes+%s))+100)/2' % (Game.rating_audio.range, Game.rating_audio.weight)})
+			game_list = game_list.order_by('rating')
+
+	if 'category' in request.GET:
+		category=request.GET['category']
+		game_list = game_list.filter(categories__id__exact=category)
+	if 'platform' in request.GET:
+		platform=request.GET['platform']
+		game_list = game_list.filter(platforms__gameplatformlink__platform__id__exact=platform)
+	if 'search' in request.GET:
+		search=request.GET['search']
+		game_list = game_list.filter(title__contains=search)
+
 	paginator = Paginator(game_list, 20)
 	page = request.GET.get('page')
 	try:
@@ -26,16 +62,17 @@ def listgames(request):
 		games = paginator.page(paginator.num_pages)
 	categories = GameCategory.objects.all()
 	platforms = GamePlatform.objects.all()
-	return render_to_response('unicorn/games.html', {'topnav':'listgames','games':games,'categories':categories,'platforms':platforms})
+	return render_to_response('unicorn/games.html', {'topnav':'listgames','games':games,'categories':categories,'platforms':platforms,'cat':category,'sort':sorting,'plat':platform,'search':search})
   
-#@login_required  
+@login_required  
 @csrf_protect
-def submitgamebasic(request):
+def submitgamebasic(request,jam=None):
 	context = {'topnav':'submitgamebasic'}
 	if request.method == 'POST': 
 		game = Game()
 		form = GameSubmitForm(request.POST,instance = game) 
 		if form.is_valid():
+			form.users.append(request.user)
 			form.save()
 			context['success'] = True
 			return HttpResponseRedirect(reverse('games.views.submitgameplatforms', kwargs={'id': game.id}))
@@ -44,10 +81,17 @@ def submitgamebasic(request):
 	else:
 		form = GameSubmitForm()
 
+	if jam:
+		try:
+			jamO = GameJam.objects.get(id=jam)
+			context['jam'] = jamO
+		except GameJam.DoesNotExist:
+			return render_to_response('unicorn/jamsdoesnotexist.html')
+
 	context['form'] = form;
 	return render_to_response('unicorn/submitgame_basic.html',context,context_instance=RequestContext(request))
 
-#@login_required  
+@login_required  
 @csrf_protect
 def submitgameplatforms(request,id="-1"):
 	context = {'topnav':'submitgameplatforms'}
@@ -82,7 +126,7 @@ def submitgameplatforms(request,id="-1"):
 	context['links'] = links;
 	return render_to_response('unicorn/submitgame_links.html', context,context_instance=RequestContext(request))
 
-#@login_required  
+@login_required  
 @csrf_protect
 def submitgamecategories(request,id="-1"):
 	context = {'topnav':'submitgamecategories'}
@@ -112,7 +156,7 @@ def submitgamecategories(request,id="-1"):
 	context['categories'] = cats;
 	return render_to_response('unicorn/submitgame_categories.html', context,context_instance=RequestContext(request))
 
-#@login_required  
+@login_required  
 @csrf_protect
 def submitgamecontact(request,id="-1"):
 	context = {'topnav':'submitgamecontact'}
@@ -136,6 +180,7 @@ def submitgamecontact(request,id="-1"):
 	context['game'] = game;
 	return render_to_response('unicorn/submitgame_contact.html', context,context_instance=RequestContext(request))
 
+@login_required  
 @csrf_protect
 def submitgamepublish(request,id="-1"):
 	context = {'topnav':'submitgamepublish'}
@@ -177,7 +222,7 @@ def showgame(request,id="-1"):
 	return render_to_response('unicorn/showgame.html', {'topnav':'showgame','game':game,'platforms':platforms,'showEditOptions':showEdit},context_instance=RequestContext(request))
 
 
-
+@login_required  
 @csrf_protect
 def editgamebasic(request,id="-1"):
 	context = {'topnav':'editgamebasic'}
@@ -200,6 +245,7 @@ def editgamebasic(request,id="-1"):
 	context['game'] = game;
 	return render_to_response('unicorn/editgame_basic.html', context,context_instance=RequestContext(request))
 
+@login_required  
 @csrf_protect
 def editgamecontact(request,id="-1"):
 	context = {'topnav':'editgamecontact'}
@@ -222,6 +268,7 @@ def editgamecontact(request,id="-1"):
 	context['game'] = game;
 	return render_to_response('unicorn/editgame_contact.html', context,context_instance=RequestContext(request))
 
+@login_required  
 @csrf_protect
 def editgameplatforms(request,id="-1"):
 	context = {'topnav':'editgameplatforms'}
@@ -255,6 +302,7 @@ def editgameplatforms(request,id="-1"):
 	context['links'] = links;
 	return render_to_response('unicorn/editgame_links.html', context,context_instance=RequestContext(request))
 
+@login_required  
 @csrf_protect
 def editgamecategories(request,id="-1"):
 	context = {'topnav':'editgamecategories'}
@@ -284,6 +332,7 @@ def editgamecategories(request,id="-1"):
 	context['categories'] = cats;
 	return render_to_response('unicorn/editgame_categories.html', context,context_instance=RequestContext(request))
 
+@login_required  
 def editgamemedia(request,id="-1"):
 	try:
 		game = Game.objects.get(id=id)

@@ -60,8 +60,8 @@
                             <li  class="{% navactive topnav 'listgames' %}"><a href="{% url 'games.views.listgames' %}">Explore</a></li>
                             <li class="{% navactive topnav 'submit' %}"><a href="{% url 'games.views.submitgamebasic' %}">Submit</a></li>
 
-                            <li><form class="navbar-search pull-left">
-  <input type="text" class="span3 search-query" placeholder="Search for amazing game">
+                            <li><form class="navbar-search pull-left" action="{% url 'games.views.listgames' %}" method="get">
+  <input type="text" name="search" class="span3 search-query" placeholder="{%if search%} {{search}} {%else%}Search for amazing game {%endif%}">
 </form></li>
                             <li class="{% navactive topnav 'blog' %}"><a href="{% url 'views.blog' %}" >Blog</a></li>
                             <li class="{% navactive topnav 'about' %}"><a href="{% url 'views.about' %}">About</a></li>

@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     url(r'list/$', 'games.views.listgames'),
     url(r'submitgamebasic/$', 'games.views.submitgamebasic'),
+    url(r'submitgamebasic/(?P<jam>\d+)/$', 'games.views.submitgamebasic'),
     url(r'submitgameplatforms/(?P<id>\d+)/$', 'games.views.submitgameplatforms'),
     url(r'submitgamecategories/(?P<id>\d+)/$', 'games.views.submitgamecategories'),
     url(r'submitgamemedia/(?P<id>\d+)/$', 'games.views.submitgamemedia'),
